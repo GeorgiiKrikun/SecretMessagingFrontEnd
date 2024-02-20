@@ -3,9 +3,9 @@
 #include <QVBoxLayout>
 #include "Encoder.h"
 
-CreateSecretWidget::CreateSecretWidget(QWidget* parent) : QWidget(parent) {
+CreateSecretWidget::CreateSecretWidget(QWidget* parent) : QFrame(parent) {
     QLayout* layout = new QVBoxLayout(this);
-
+    setFrameStyle(QFrame::Box);
     _message_input = new QLineEdit(this);
     layout->addWidget(_message_input);
 
@@ -33,6 +33,6 @@ void CreateSecretWidget::createSecret()
 {
     QString message = _message_input->text();
     QString secret = _secret_input->text();
-    QString encoded_message = encoder::encode(secret);
-    _result->setText(encoded_message + message);
+    QString encoded_message = encoder::mix_text_and_secret(message,secret);
+    _result->setText(encoded_message);
 }

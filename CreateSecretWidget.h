@@ -1,11 +1,10 @@
 #ifndef CREATESECRETWIDGET_H
 #define CREATESECRETWIDGET_H
 
-#include <QWidget>
-
+#include <QFrame>
 #include <QLineEdit>
 
-class CreateSecretWidget : public QWidget
+class CreateSecretWidget : public QFrame
 {
     Q_OBJECT
 public:
