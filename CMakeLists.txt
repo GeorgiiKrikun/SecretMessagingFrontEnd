@@ -9,21 +9,24 @@ set(CMAKE_AUTORCC ON)
 set(CMAKE_CXX_STANDARD 17)
 set(CMAKE_CXX_STANDARD_REQUIRED ON)
 
-find_package(QT NAMES Qt6 Qt5 REQUIRED COMPONENTS Widgets)
+find_package(QT NAMES Qt6 REQUIRED COMPONENTS Widgets)
 find_package(Qt${QT_VERSION_MAJOR} REQUIRED COMPONENTS Widgets)
 
 set(PROJECT_SOURCES
         main.cpp
         mainwindow.cpp
         mainwindow.h
+        CreateSecretWidget.h
+        CreateSecretWidget.cpp
+        Encoder.h
+        Encoder.cpp
 )
 
 if(${QT_VERSION_MAJOR} GREATER_EQUAL 6)
     qt_add_executable(SecretMessagingFrontEnd
         MANUAL_FINALIZATION
         ${PROJECT_SOURCES}
-        CreateSecretWidget.h CreateSecretWidget.cpp
-    )
+        )
 # Define target properties for Android with Qt 6 as:
 #    set_property(TARGET SecretMessagingFrontEnd APPEND PROPERTY QT_ANDROID_PACKAGE_SOURCE_DIR
 #                 ${CMAKE_CURRENT_SOURCE_DIR}/android)
@@ -68,3 +71,11 @@ install(TARGETS SecretMessagingFrontEnd
 if(QT_VERSION_MAJOR EQUAL 6)
     qt_finalize_executable(SecretMessagingFrontEnd)
 endif()
+
+# Add tests
+qt_add_executable(Tests
+    MANUAL_FINALIZATION
+    Tests.cpp Encoder.h Encoder.cpp
+    )
+
+qt_finalize_executable(Tests)

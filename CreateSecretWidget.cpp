@@ -1,6 +1,7 @@
 #include "CreateSecretWidget.h"
 #include <QPushButton>
 #include <QVBoxLayout>
+#include "Encoder.h"
 
 CreateSecretWidget::CreateSecretWidget(QWidget* parent) : QWidget(parent) {
     QLayout* layout = new QVBoxLayout(this);
@@ -32,5 +33,6 @@ void CreateSecretWidget::createSecret()
 {
     QString message = _message_input->text();
     QString secret = _secret_input->text();
-    _result->setText(message+ " " + secret);
+    QString encoded_message = encoder::encode(secret);
+    _result->setText(encoded_message + message);
 }
