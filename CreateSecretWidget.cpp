@@ -1,7 +1,9 @@
 #include "CreateSecretWidget.h"
 #include <QPushButton>
 #include <QVBoxLayout>
+#include <QStyle>
 #include "Encoder.h"
+#include "qapplication.h"
 
 CreateSecretWidget::CreateSecretWidget(QWidget* parent) : QFrame(parent) {
     QLayout* layout = new QVBoxLayout(this);
@@ -17,17 +19,30 @@ CreateSecretWidget::CreateSecretWidget(QWidget* parent) : QFrame(parent) {
     QPushButton* _create_secret_button = new QPushButton("Create Secret", this);
     layout->addWidget(_create_secret_button);
 
+
+    QWidget* _container = new QWidget(this);
+    layout->addWidget(_container);
+    QHBoxLayout* _container_layout = new QHBoxLayout(_container);
+
     _result = new QLineEdit(this);
     _result->setReadOnly(true);
     _result->setPlaceholderText("Here the secret string will appear");
-    layout->addWidget(_result);
+    _container_layout->addWidget(_result);
 
+    QPushButton* _copy_button = new QPushButton("", this);
+    QIcon openIcon = QApplication::style()->standardIcon(QStyle::SP_DriveFDIcon);
+    _copy_button->setIcon(openIcon);
+    _container_layout->addWidget(_copy_button);
 
 
     QSpacerItem* _spacer = new QSpacerItem(0, 0, QSizePolicy::Minimum, QSizePolicy::Expanding);
     layout->addItem(_spacer);
 
-
+    QObject::connect(_copy_button,
+                     & QPushButton::clicked,
+                     this,
+                     & CreateSecretWidget::copySecret,
+                     Qt::DirectConnection);
 
     QObject::connect(_create_secret_button,
                      & QPushButton::clicked,
@@ -42,4 +57,11 @@ void CreateSecretWidget::createSecret()
     QString secret = _secret_input->text();
     QString encoded_message = encoder::mix_text_and_secret(message,secret);
     _result->setText(encoded_message);
+}
+
+void CreateSecretWidget::copySecret()
+{
+    _result->selectAll();
+    _result->copy();
+    _result->deselect();
 }

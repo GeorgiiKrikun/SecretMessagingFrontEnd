@@ -12,6 +12,7 @@ public:
 
 private slots:
     void revealSecret();
+    void pasteSecret();
 
 private:
     QLineEdit* _message_input;

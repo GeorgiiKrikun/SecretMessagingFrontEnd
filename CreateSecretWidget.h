@@ -12,7 +12,7 @@ public:
 
 private slots:
     void createSecret();
-
+    void copySecret();
 private:
     QLineEdit* _message_input;
     QLineEdit* _secret_input;

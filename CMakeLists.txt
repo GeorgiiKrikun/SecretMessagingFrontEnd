@@ -22,8 +22,8 @@ set(PROJECT_SOURCES
         Encoder.cpp
         RevealSecretWidget.h
         RevealSecretWidget.cpp
-
-
+        resources.qrc
+        MainTabWidget.h MainTabWidget.cpp
 )
 
 qt6_add_resources(resources.qrc)
@@ -32,8 +32,6 @@ if(${QT_VERSION_MAJOR} GREATER_EQUAL 6)
     qt_add_executable(SecretMessagingFrontEnd
         MANUAL_FINALIZATION
         ${PROJECT_SOURCES}
-        resources.qrc
-        MainTabWidget.h MainTabWidget.cpp
         )
 # Define target properties for Android with Qt 6 as:
 #    set_property(TARGET SecretMessagingFrontEnd APPEND PROPERTY QT_ANDROID_PACKAGE_SOURCE_DIR
