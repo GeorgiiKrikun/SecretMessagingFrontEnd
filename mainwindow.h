@@ -16,7 +16,7 @@ public:
     ~MainWindow();
 
 private:
-    QWidget* _main_widget;
+    QTabWidget* _main_widget;
     QHBoxLayout* _layout;
     Sidebar* _sidebar;
     CreateSecretWidget* _create_secret_widget;
