@@ -10,6 +10,8 @@ MainWindow::MainWindow(QWidget *parent)
 {
     setWindowTitle("Hello World");
     _main_widget = new MainTabWidget(this);
+    _main_widget->setMinimumWidth(300);
+    _main_widget->setMinimumHeight(300);
     setCentralWidget(_main_widget);
     _create_secret_widget = new CreateSecretWidget(this);
     _reveal_secret_widget = new RevealSecretWidget(this);

@@ -13,6 +13,10 @@ RevealSecretWidget::RevealSecretWidget(QWidget *parent)
 
     _message_input = new QLineEdit(this);
     layout->addWidget(_message_input);
+    _message_input->setPlaceholderText("Paste the string with secret message here");
+
+    QPushButton* _reveal_secret_button = new QPushButton("Reveal Secret", this);
+    layout->addWidget(_reveal_secret_button);
 
     _result = new QLineEdit(this);
     _result->setReadOnly(true);
@@ -21,8 +25,7 @@ RevealSecretWidget::RevealSecretWidget(QWidget *parent)
     QSpacerItem* _spacer = new QSpacerItem(0, 0, QSizePolicy::Minimum, QSizePolicy::Expanding);
     layout->addItem(_spacer);
 
-    QPushButton* _reveal_secret_button = new QPushButton("Reveal Secret", this);
-    layout->addWidget(_reveal_secret_button);
+
 
     QObject::connect(_reveal_secret_button,
                      & QPushButton::clicked,
