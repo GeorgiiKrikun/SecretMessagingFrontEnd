@@ -53,6 +53,9 @@ else()
 endif()
 
 target_link_libraries(SecretMessagingFrontEnd PRIVATE Qt${QT_VERSION_MAJOR}::Widgets)
+# Enable for WASM optimisations
+# target_compile_options(SecretMessagingFrontEnd PRIVATE -oz -flto)
+# target_link_options(SecretMessagingFrontEnd PRIVATE -flto)
 
 # Qt for iOS sets MACOSX_BUNDLE_GUI_IDENTIFIER automatically since Qt 6.1.
 # If you are developing for iOS or macOS you should consider setting an
